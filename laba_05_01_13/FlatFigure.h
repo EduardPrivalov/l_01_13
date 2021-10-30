@@ -8,8 +8,9 @@ class FlatFigure :
 private:
 	double area;
 public:
-	FlatFigure(std::string type, std::string picture, List<double> sizes, double area) :
-		Figure(type, picture, sizes), area(area) {};
+	FlatFigure(std::string type, std::string picture, List<double> sizes, double area);
+	~FlatFigure();
 	std::string getAllData() override;
+	std::string getAllDataForPrint() override;
 };
 

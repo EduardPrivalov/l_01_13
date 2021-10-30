@@ -8,8 +8,9 @@ class VolumetricFigure :
 private:
     double volume;
 public:
-	VolumetricFigure(std::string type, std::string picture, List<double> sizes, double volume) :
-		Figure(type, picture, sizes), volume(volume) {};
+	VolumetricFigure(std::string type, std::string picture, List<double> sizes, double volume);
+	~VolumetricFigure();
 	std::string getAllData() override;
+	std::string getAllDataForPrint() override;
 };
 
