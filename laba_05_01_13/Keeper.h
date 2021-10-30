@@ -12,6 +12,7 @@ private:
 	List<Figure*> figures;
 
 public:
+	Keeper();
 	~Keeper();
 	void deleteFigure(size_t position);
 	void addFigure(Figure* newFigure);

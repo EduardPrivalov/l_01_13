@@ -1,7 +1,13 @@
 #include "Keeper.h"
 
+Keeper::Keeper()
+{
+	std::cout << "Keeper()\n";
+}
+
 Keeper::~Keeper()
 {
+	std::cout << "~Keeper()\n";
 	if (figures.size())
 		for (size_t i = 0; i < figures.size(); i++)
 			delete figures[i];
@@ -9,7 +15,7 @@ Keeper::~Keeper()
 
 void Keeper::deleteFigure(size_t position)
 {
-	figures.pop(position);
+	delete figures.pop(position);
 }
 
 void Keeper::addFigure(Figure* newFigure)
