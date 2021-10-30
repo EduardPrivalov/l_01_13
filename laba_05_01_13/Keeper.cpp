@@ -1,23 +1,68 @@
 #include "Keeper.h"
 
+Keeper::~Keeper()
+{
+	if (figures.size())
+		for (size_t i = 0; i < figures.size(); i++)
+			delete figures[i];
+}
+
 void Keeper::deleteFigure(size_t position)
 {
+	figures.pop(position);
 }
 
 void Keeper::addFigure(Figure* newFigure)
 {
+	figures.push_back(newFigure);
 }
 
 int Keeper::saveToFile(std::string file)
 {
-	return 0;
+	std::ofstream fout(file);
+	if (!fout) return 0;
+	fout << to_string(figures.size()) << std::endl;
+	for (size_t i = 0; i < figures.size(); ++i)
+		fout << figures[i]->getAllData();
+
+	fout.close();
+	return 1;
 }
 
 int Keeper::loadFromFile(std::string file)
 {
-	return 0;
+	std::ifstream fin(file);
+	if (!fin) return 0;
+
+	std::string mainType, type, picture;
+	size_t figuresAmount, sizesAmount;
+	List<double> sizes;
+	double bufferSize, bufferNum;
+
+	fin >> figuresAmount;
+	for (size_t i = 0; i < figuresAmount; i++)
+	{
+		fin >> mainType;
+		getline(fin, type);
+		getline(fin, type);
+		getline(fin, picture);
+		fin >> sizesAmount;
+		for (size_t j = 0; j < sizesAmount; j++)
+		{
+			fin >> bufferSize;
+			sizes.push_back(bufferSize);
+		}
+		fin >> bufferNum;
+		if (mainType == "Flat")
+			figures.push_back(new FlatFigure(type, picture, sizes, bufferNum));
+		else if (mainType == "Volumetric")
+			figures.push_back(new FlatFigure(type, picture, sizes, bufferNum));
+	}
+	return 1;
 }
 
 void Keeper::printAll()
 {
+	for (size_t i = 0; i < figures.size(); i++)
+		std::cout << figures[i]->getAllData() << std::endl;
 }
