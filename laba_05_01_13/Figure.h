@@ -1,14 +1,15 @@
 #pragma once
-#include <String>
+#include <string>
 #include "List.h"
 class Figure
 {
 protected:
-	std::string type;
+	std::string type, picture; // например: "figure1.png"
 	List<double> sizes;
-	std::string picture; // например: "figure1.png"
 
 public:
+	Figure(std::string type, std::string picture, List<double> sizes) :
+		type(type), picture(picture), sizes(sizes) {}
 	virtual std::string getAllData() = 0;
 };
 
