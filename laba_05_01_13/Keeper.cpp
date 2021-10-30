@@ -23,6 +23,11 @@ void Keeper::addFigure(Figure* newFigure)
 	figures.push_back(newFigure);
 }
 
+size_t Keeper::size()
+{
+	return figures.size();
+}
+
 int Keeper::saveToFile(std::string file)
 {
 	std::ofstream fout(file);
@@ -42,12 +47,12 @@ int Keeper::loadFromFile(std::string file)
 
 	std::string mainType, type, picture;
 	size_t figuresAmount, sizesAmount;
-	List<double> sizes;
 	double bufferSize, bufferNum;
 
 	fin >> figuresAmount;
 	for (size_t i = 0; i < figuresAmount; i++)
 	{
+		List<double> sizes;
 		fin >> mainType;
 		getline(fin, type);
 		getline(fin, type);
@@ -59,10 +64,10 @@ int Keeper::loadFromFile(std::string file)
 			sizes.push_back(bufferSize);
 		}
 		fin >> bufferNum;
-		if (mainType == "Flat")
+		if (mainType == "FlatFigure")
 			figures.push_back(new FlatFigure(type, picture, sizes, bufferNum));
-		else if (mainType == "Volumetric")
-			figures.push_back(new FlatFigure(type, picture, sizes, bufferNum));
+		else if (mainType == "VolumetricFigure")
+			figures.push_back(new VolumetricFigure(type, picture, sizes, bufferNum));
 	}
 	return 1;
 }
@@ -70,5 +75,5 @@ int Keeper::loadFromFile(std::string file)
 void Keeper::printAll()
 {
 	for (size_t i = 0; i < figures.size(); i++)
-		std::cout << figures[i]->getAllData() << std::endl;
+		std::cout << "Фигура №" << i + 1 << ":\n" << figures[i]->getAllDataForPrint() << "\n";
 }

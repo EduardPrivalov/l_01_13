@@ -16,6 +16,7 @@ public:
 	~Keeper();
 	void deleteFigure(size_t position);
 	void addFigure(Figure* newFigure);
+	size_t size();
 	int saveToFile(std::string file);
 	int loadFromFile(std::string file);
 	void printAll();
