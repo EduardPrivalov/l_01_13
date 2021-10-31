@@ -101,13 +101,15 @@ int main()
 					<< (kipper.size() == 1 ? 1 : kipper.size())
 					<< "\n\t->";
 				cin >> position;
-				if (position >= 1 && position <= kipper.size())
+				try
 				{
 					kipper.deleteFigure(position-1);
 					cout << "\tДанные успешно удалены\n";
 				}
-				else
+				catch(int)
+				{
 					cout << "\tВыбрано недопустимое значение!\n";
+				}
 			}
 			break; }
 		case 5: {
